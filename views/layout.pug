@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="/css/normalize.css")
+        link(rel="stylesheet", href="/css/app.css")
+        title #{nombrePagina}
+    body 
+        header.barra
+            h1 UpTask - Administrador de proyectos
+            a(href="#") Cerrar sesion 
+        
+        main.contenedor
+            aside.contenedor-proyectos  
+                .panel.crear-proyecto
+                    a(href="/nuevo-proyecto" class="boton" style="padding: 2rem 1rem") Nuevo proyecto
+                        span +  
+
+                .panel.lista-proyectos 
+                    h2 Proyectos
+                    ul#proyectos.proyectos 
+                        li 
+                            a(href="#") Diseño de tienda virtual   
+                        li     
+                            a(href="#") Diseño de logotipo 
+                        li 
+                            a(href="#") Diseño de la casa   
+
+            block content 
