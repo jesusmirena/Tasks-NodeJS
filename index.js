@@ -2,6 +2,13 @@ const express = require("express");
 const routes = require("./routes");
 const path = require("path");
 
+//Connect the DB
+const db = require("./config/db");
+require("./models/Proyectos");
+db.sync()
+  .then(() => console.log("Connected"))
+  .catch((error) => console.log("Unable to connect to the database:", error));
+
 const app = express();
 
 //Where to upload the static files
