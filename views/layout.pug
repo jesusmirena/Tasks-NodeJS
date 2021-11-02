@@ -6,26 +6,26 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         link(rel="stylesheet", href="/css/normalize.css")
         link(rel="stylesheet", href="/css/app.css")
-        title #{nombrePagina}
+        title #{pageName}
     body 
         header.barra
-            h1 UpTask - Administrador de proyectos
-            a(href="#") Cerrar sesion 
+            h1 UpTask - Project Administrator
+            a(href="#") Log out 
         
         main.contenedor
             aside.contenedor-proyectos  
                 .panel.crear-proyecto
-                    a(href="/nuevo-proyecto" class="boton" style="padding: 2rem 1rem") Nuevo proyecto
+                    a(href="/new-project" class="boton" style="padding: 2rem 1rem") New Project
                         span +  
 
                 .panel.lista-proyectos 
-                    h2 Proyectos
+                    h2 Projects
                     ul#proyectos.proyectos 
                         if(projects.length)
                             each project in projects 
                                 li 
-                                    a(href=`/projects/${project.url}`)= project.nombre
+                                    a(href=`/projects/${project.url}`)= project.name 
 
 
             block content 
-            pre= vardump(projects)
+            //- pre= vardump(projects)

@@ -5,16 +5,16 @@ const router = express.Router();
 const { body } = require("express-validator");
 
 //Import controller
-const proyectosController = require("../controllers/proyectosController");
+const projectsController = require("../controllers/projectsController");
 
 module.exports = function () {
-  router.get("/", proyectosController.proyectosHome);
-  router.get("/nuevo-proyecto", proyectosController.formularioProyecto);
+  router.get("/", projectsController.projectsHome);
+  router.get("/new-project", projectsController.projectForm);
   router.post(
-    "/nuevo-proyecto",
+    "/new-project",
     body("nombre").not().isEmpty().trim().escape(),
-    proyectosController.nuevoProyecto
+    projectsController.newProject
   );
-  router.get("/projects/:url", proyectosController.projectByUrl);
+  router.get("/projects/:url", projectsController.projectByUrl);
   return router;
 };

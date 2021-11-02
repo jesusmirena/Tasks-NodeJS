@@ -3,25 +3,25 @@ const db = require("../config/db");
 const slug = require("slug");
 const { nanoid } = require("nanoid");
 
-const Proyectos = db.define(
-  "proyectos",
+const Projects = db.define(
+  "projects",
   {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    nombre: Sequelize.STRING,
+    name: Sequelize.STRING,
     url: Sequelize.STRING,
   },
   {
     hooks: {
       beforeCreate(project) {
-        const url = slug(project.nombre).toLowerCase();
+        const url = slug(project.name).toLowerCase();
         project.url = `${url}-${nanoid()}`;
       },
     },
   }
 );
 
-module.exports = Proyectos;
+module.exports = Projects;
