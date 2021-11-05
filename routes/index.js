@@ -16,5 +16,6 @@ module.exports = function () {
     projectsController.newProject
   );
   router.get("/projects/:url", projectsController.projectByUrl);
+  router.get("/projects/edit/:id", projectsController.editForm);
   return router;
 };
