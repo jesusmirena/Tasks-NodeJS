@@ -36,7 +36,7 @@ exports.newProject = async (req, res) => {
       projects,
     });
   } else {
-    const project = await Projects.create({ name });
+    await Projects.create({ name });
     res.redirect("/");
   }
 };
@@ -79,4 +79,34 @@ exports.editForm = async (req, res) => {
     projects,
     project,
   });
+};
+
+exports.updateProject = async (req, res) => {
+  const projects = await Projects.findAll();
+
+  //Validate forms
+  const { name } = req.body;
+  let errors = [];
+
+  if (!name) {
+    errors.push({ texto: "Add a project name" });
+  }
+
+  if (errors.length > 0) {
+    res.render("newProject", {
+      pageName: "New Project",
+      errors,
+      projects,
+    });
+  } else {
+    await Projects.update({ name: name }, { where: { id: req.params.id } });
+    res.redirect("/");
+  }
+};
+exports.deleteProject = async (req, res, next) => {
+  const result = await Projects.destroy({ where: { url: req.params.url } });
+  if (!result) {
+    return next();
+  }
+  res.status(200).send("Your project has been deleted successfully");
 };

@@ -9,6 +9,8 @@ const helpers = require("./helpers");
 const db = require("./config/db");
 //Import models
 require("./models/Projects");
+require("./models/Tasks");
+
 db.sync()
   .then(() => console.log("Connected"))
   .catch((error) => console.log("Unable to connect to the database:", error));

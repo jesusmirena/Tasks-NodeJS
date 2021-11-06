@@ -15,7 +15,19 @@ module.exports = function () {
     body("nombre").not().isEmpty().trim().escape(),
     projectsController.newProject
   );
+  //List project
   router.get("/projects/:url", projectsController.projectByUrl);
+
+  //Update project
   router.get("/projects/edit/:id", projectsController.editForm);
+  router.post(
+    "/new-project/:id",
+    body("nombre").not().isEmpty().trim().escape(),
+    projectsController.updateProject
+  );
+
+  //Delete project
+  router.delete("/projects/:url", projectsController.deleteProject);
+
   return router;
 };
