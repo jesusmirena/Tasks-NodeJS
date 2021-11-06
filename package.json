@@ -4,11 +4,14 @@
   "description": "Proyecto UPTastk con Node y MVC",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "concurrently \"npm run dev \" \"npm run watch \"",
+    "dev": "nodemon ./index.js",
+    "watch": "webpack -w --mode development"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^6.3.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.12.2",
@@ -20,6 +23,11 @@
     "slug": "^5.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-loader": "^8.2.3",
+    "nodemon": "^2.0.12",
+    "webpack": "^5.62.1",
+    "webpack-cli": "^4.9.1"
   }
 }
