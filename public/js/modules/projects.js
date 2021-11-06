@@ -19,14 +19,23 @@ if (buttonDelete) {
       if (result.isConfirmed) {
         //Sending axios request
         const url = `${location.origin}/projects/${projectUrl}`;
-        axios.delete(url).then((res) => {
-          console.log(res);
+        axios
+          .delete(url)
+          .then((res) => {
+            console.log(res);
 
-          Swal.fire("Deleted!", res.data, "success");
-          setTimeout(() => {
-            window.location.href = "/";
-          }, 2000);
-        });
+            Swal.fire("Deleted!", res.data, "success");
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 2000);
+          })
+          .catch(() => {
+            Swal.fire({
+              type: "error",
+              title: "Oops, there was an error",
+              text: "Your project couldn't be deleted",
+            });
+          });
       }
     });
   });
