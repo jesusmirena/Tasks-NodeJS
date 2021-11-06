@@ -5,8 +5,8 @@ block content
 
         form.agregar-tarea(action=`/projects/${project.url}` method="POST")
             .campo
-                label(for="task") Task:
-                input.nombre-tarea(type="text" name="task" placeholder="Task name")
+                label(for="tasks") Task:
+                input.nombre-tarea(type="text" name="tasks" placeholder="Task name")
             .campo.enviar
                 input.boton.nueva-tarea(type="submit" value="Add")
 
