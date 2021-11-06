@@ -6,6 +6,7 @@ const { body } = require("express-validator");
 
 //Import controller
 const projectsController = require("../controllers/projectsController");
+const tasksController = require("../controllers/tasksController");
 
 module.exports = function () {
   router.get("/", projectsController.projectsHome);
@@ -28,6 +29,9 @@ module.exports = function () {
 
   //Delete project
   router.delete("/projects/:url", projectsController.deleteProject);
+
+  //TASKS
+  router.post("/projects/:url", tasksController.addTask);
 
   return router;
 };

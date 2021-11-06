@@ -3,6 +3,13 @@ block content
     .contenido-principal 
         h1 #{pageName} - #{project.name}
 
+        form.agregar-tarea(action=`/projects/${project.url}` method="POST")
+            .campo
+                label(for="tasks") Task:
+                input.nombre-tarea(type="text" name="tasks" placeholder="Task name")
+            .campo.enviar
+                input.boton.nueva-tarea(type="submit" value="Add")
+
         .contenedor-acciones
             a(href=`/projects/edit/${project.id}` class="boton") Edit project 
             button#eliminar-proyecto(data-project-url=project.url type="button" class="boton eliminar") Delete project
