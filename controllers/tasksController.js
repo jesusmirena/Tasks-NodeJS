@@ -16,3 +16,7 @@ exports.addTask = async (req, res, next) => {
   }
   res.redirect(`/projects/${req.params.url}`);
 };
+
+exports.changeTaskStatus = async (req, res) => {
+  res.send("fino");
+};

@@ -33,5 +33,7 @@ module.exports = function () {
   //TASKS
   router.post("/projects/:url", tasksController.addTask);
 
+  //Update task
+  router.patch("/tasks/:id", tasksController.changeTaskStatus);
   return router;
 };

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const tasks = document.querySelector(".listado-pendientes");
 
 if (tasks) {
@@ -5,7 +7,9 @@ if (tasks) {
     if (e.target.classList.contains("fa-check-circle")) {
       const icon = e.target;
       const taskId = icon.parentElement.parentElement.dataset.task;
-      console.log(taskId);
+      const url = `${location.origin}/tasks/${taskId}`;
+
+      axios.patch(url, { taskId }).then((response) => console.log(response));
     }
   });
 }
