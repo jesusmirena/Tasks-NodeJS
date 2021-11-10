@@ -14,14 +14,14 @@ block content
             ul 
               if tasks.length    
                 each task in tasks
-                    li.tarea    
+                    li.tarea(data-task=task.id)    
                         p= task.tasks
                         .acciones 
                             if task.status
                                 i.far.fa-check-circle.completo 
                             else 
                                 i.far.fa-check-circle
-                            i.far.fa-trash
+                            i.fas.fa-trash
               else
                 p There's no tasks in this project
         .contenedor-acciones
