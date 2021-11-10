@@ -9,7 +9,21 @@ block content
                 input.nombre-tarea(type="text" name="tasks" placeholder="Task name")
             .campo.enviar
                 input.boton.nueva-tarea(type="submit" value="Add")
-
+        //- pre= vardump(tasks)
+        .listado-pendientes 
+            ul 
+              if tasks.length    
+                each task in tasks
+                    li.tarea    
+                        p= task.tasks
+                        .acciones 
+                            if task.status
+                                i.far.fa-check-circle.completo 
+                            else 
+                                i.far.fa-check-circle
+                            i.far.fa-trash
+              else
+                p There's no tasks in this project
         .contenedor-acciones
             a(href=`/projects/edit/${project.id}` class="boton") Edit project 
             button#eliminar-proyecto(data-project-url=project.url type="button" class="boton eliminar") Delete project
