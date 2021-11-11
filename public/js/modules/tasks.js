@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const tasks = document.querySelector(".listado-pendientes");
 
@@ -12,6 +13,27 @@ if (tasks) {
       axios.patch(url, { taskId }).then((response) => {
         if (response.status === 200) {
           icon.classList.toggle("completo");
+        }
+      });
+    }
+    if (e.target.classList.contains("fa-trash")) {
+      const taskHTML = e.target.parentElement.parentElement,
+        taskId = taskHTML.dataset.task;
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.value) {
+          const url = `${location.origin}/tasks/${taskId}`;
+          //Sending the Delete Request
+          axios
+            .delete(url, { params: { taskId } })
+            .then((response) => console.log(response));
         }
       });
     }

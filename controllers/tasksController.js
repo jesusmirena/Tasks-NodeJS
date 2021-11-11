@@ -33,3 +33,7 @@ exports.changeTaskStatus = async (req, res, next) => {
 
   res.status(200).send("Updated");
 };
+
+exports.deleteTask = async (req, res) => {
+  res.send("Eliminando");
+};

@@ -35,5 +35,8 @@ module.exports = function () {
 
   //Update task
   router.patch("/tasks/:id", tasksController.changeTaskStatus);
+
+  //Delete task
+  router.delete("/tasks/:id", tasksController.deleteTask);
   return router;
 };
