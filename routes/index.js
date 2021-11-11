@@ -28,10 +28,15 @@ module.exports = function () {
   );
 
   //Delete project
-  router.delete("/projects/:url", projectsController.deleteProject);
+  router.delete("/projects/:url/:id", projectsController.deleteProject);
 
   //TASKS
   router.post("/projects/:url", tasksController.addTask);
 
+  //Update task
+  router.patch("/tasks/:id", tasksController.changeTaskStatus);
+
+  //Delete task
+  router.delete("/tasks/:id", tasksController.deleteTask);
   return router;
 };

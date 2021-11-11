@@ -1,4 +1,5 @@
 const Projects = require("../models/Projects");
+const Tasks = require("../models/Tasks");
 
 exports.projectsHome = async (req, res) => {
   const projects = await Projects.findAll();
@@ -54,12 +55,20 @@ exports.projectByUrl = async (req, res, next) => {
     projectPromise,
   ]);
 
+  //check tasks of each project
+  const tasks = await Tasks.findAll({
+    where: {
+      projectId: project.id,
+    },
+  });
+
   if (!project) return next();
 
   res.render("tasks", {
     pageName: "Project tasks",
     project,
     projects,
+    tasks,
   });
 };
 
@@ -104,6 +113,10 @@ exports.updateProject = async (req, res) => {
   }
 };
 exports.deleteProject = async (req, res, next) => {
+  // const { projectUrl, projectId } = req.query;
+
+  await Tasks.destroy({ where: { projectId: req.params.id } });
+
   const result = await Projects.destroy({ where: { url: req.params.url } });
   if (!result) {
     return next();
