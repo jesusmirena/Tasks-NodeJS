@@ -31,9 +31,11 @@ if (tasks) {
         if (result.value) {
           const url = `${location.origin}/tasks/${taskId}`;
           //Sending the Delete Request
-          axios
-            .delete(url, { params: { taskId } })
-            .then((response) => console.log(response));
+          axios.delete(url, { params: { taskId } }).then((response) => {
+            if (response.status === 200) {
+              taskHTML.parentElement.removeChild(taskHTML);
+            }
+          });
         }
       });
     }
