@@ -9,7 +9,11 @@ if (tasks) {
       const taskId = icon.parentElement.parentElement.dataset.task;
       const url = `${location.origin}/tasks/${taskId}`;
 
-      axios.patch(url, { taskId }).then((response) => console.log(response));
+      axios.patch(url, { taskId }).then((response) => {
+        if (response.status === 200) {
+          icon.classList.toggle("completo");
+        }
+      });
     }
   });
 }
