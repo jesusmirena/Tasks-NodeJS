@@ -6,6 +6,7 @@ const buttonDelete = document.querySelector("#eliminar-proyecto");
 if (buttonDelete) {
   buttonDelete.addEventListener("click", (e) => {
     const projectUrl = e.target.dataset.projectUrl;
+    const projectId = e.target.dataset.projectId;
 
     Swal.fire({
       title: "Are you sure?",
@@ -18,9 +19,9 @@ if (buttonDelete) {
     }).then((result) => {
       if (result.isConfirmed) {
         //Sending axios request
-        const url = `${location.origin}/projects/${projectUrl}`;
+        const url = `${location.origin}/projects/${projectUrl}/${projectId}`;
         axios
-          .delete(url)
+          .delete(url, { params: { projectUrl, projectId } })
           .then((res) => {
             console.log(res);
 
