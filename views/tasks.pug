@@ -27,6 +27,8 @@ block content
 
         .avance 
             h2 Progress of the project
+            #barra-avance.barra-avance
+                #porcentaje.porcentaje
         .contenedor-acciones
             a(href=`/projects/edit/${project.id}` class="boton") Edit project 
             button#eliminar-proyecto(data-project-url=project.url data-project-id=project.id type="button" class="boton eliminar") Delete project
