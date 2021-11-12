@@ -7,6 +7,7 @@ const { body } = require("express-validator");
 //Import controller
 const projectsController = require("../controllers/projectsController");
 const tasksController = require("../controllers/tasksController");
+const usersController = require("../controllers/usersController");
 
 module.exports = function () {
   router.get("/", projectsController.projectsHome);
@@ -38,5 +39,8 @@ module.exports = function () {
 
   //Delete task
   router.delete("/tasks/:id", tasksController.deleteTask);
+
+  //USERS
+  router.get("/create-account", usersController.createAccountForm);
   return router;
 };
