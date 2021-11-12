@@ -24,6 +24,9 @@ block content
                             i.fas.fa-trash
               else
                 p There's no tasks in this project
+
+        .avance 
+            h2 Progress of the project
         .contenedor-acciones
             a(href=`/projects/edit/${project.id}` class="boton") Edit project 
             button#eliminar-proyecto(data-project-url=project.url data-project-id=project.id type="button" class="boton eliminar") Delete project
