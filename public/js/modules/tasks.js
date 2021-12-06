@@ -1,5 +1,6 @@
 import axios from "axios";
 import Swal from "sweetalert2";
+import { updateProgress } from "../functions/progressBar";
 
 const tasks = document.querySelector(".listado-pendientes");
 
@@ -13,6 +14,7 @@ if (tasks) {
       axios.patch(url, { taskId }).then((response) => {
         if (response.status === 200) {
           icon.classList.toggle("completo");
+          updateProgress();
         }
       });
     }
@@ -34,6 +36,7 @@ if (tasks) {
           axios.delete(url, { params: { taskId } }).then((response) => {
             if (response.status === 200) {
               taskHTML.parentElement.removeChild(taskHTML);
+              updateProgress();
             }
           });
         }

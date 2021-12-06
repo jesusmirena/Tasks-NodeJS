@@ -10,6 +10,7 @@ const db = require("./config/db");
 //Import models
 require("./models/Projects");
 require("./models/Tasks");
+require("./models/Users");
 
 db.sync()
   .then(() => console.log("Connected"))
