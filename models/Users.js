@@ -14,6 +14,7 @@ const Users = db.define(
     email: {
       type: Sequelize.STRING(60),
       allowNull: false,
+      unique: true,
       validate: {
         isEmail: {
           msg: "Add a valid email",
