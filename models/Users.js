@@ -14,10 +14,23 @@ const Users = db.define(
     email: {
       type: Sequelize.STRING(60),
       allowNull: false,
+      validate: {
+        isEmail: {
+          msg: "Add a valid email",
+        },
+        notEmpty: {
+          msg: "Email can't be empty",
+        },
+      },
     },
     password: {
       type: Sequelize.STRING(60),
       allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: "Password can't be empty",
+        },
+      },
     },
   },
   {
