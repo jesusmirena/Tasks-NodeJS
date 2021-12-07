@@ -4,12 +4,12 @@ const Projects = require("./Projects");
 
 const Tasks = db.define("tasks", {
   id: {
-    type: Sequelize.INTEGER(11),
+    type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
   },
   tasks: Sequelize.STRING(100),
-  status: Sequelize.INTEGER(1),
+  status: Sequelize.INTEGER,
 });
 Tasks.belongsTo(Projects);
 

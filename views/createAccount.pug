@@ -6,9 +6,12 @@ html(lang="en")
         .contenedor-formulario
             h1 Create your UpTask Account
 
-            if errors 
-                each error in errors 
-                    p.error.alerta= error.message 
+            if locals.messages 
+                .alertas
+                    each category in Object.keys(locals.messages)
+                        each error in messages[category] 
+                            .alerta(class=`${categoria}`)
+                                p= error
 
             form#formulario.caja.caja-login(method="POST" action="/create-account")
                 .campo 

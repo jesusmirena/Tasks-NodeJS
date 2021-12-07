@@ -18,9 +18,12 @@ exports.createAccount = async (req, res) => {
     });
     res.redirect("./login");
   } catch (error) {
-    console.log("showme the ERROR", error.errors);
+    req.flash(
+      "error",
+      error.errors.map((error) => error.message)
+    );
     res.render("createAccount", {
-      errors: error.errors,
+      messages: req.flash(),
       pageName: "Create UpTask account",
     });
   }
