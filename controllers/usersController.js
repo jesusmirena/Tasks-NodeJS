@@ -5,6 +5,11 @@ exports.createAccountForm = (req, res) => {
     pageName: "Create UpTask account",
   });
 };
+exports.loginForm = (req, res) => {
+  res.render("login", {
+    pageName: "Log in to UpTask",
+  });
+};
 
 exports.createAccount = async (req, res) => {
   //Read data
