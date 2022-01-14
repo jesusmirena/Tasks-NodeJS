@@ -1,5 +1,6 @@
 const passport = require("passport");
 const Users = require("../models/Users");
+const crypto = require("crypto");
 
 exports.authenticateUser = passport.authenticate("local", {
   successRedirect: "/",
@@ -26,9 +27,17 @@ exports.sendToken = async (req, res) => {
 
   if (!user) {
     req.flash("error", "This account doesn't exist");
-    res.render("reset", {
-      pageName: "Reset your Password",
-      messages: req.flash(),
-    });
+    res.redirect("/reset-password");
   }
+  user.token = crypto.randomBytes(20).toString("hex");
+  user.expiration = Date.now() + 3600000;
+
+  await user.save();
+
+  const resetUrl = `http://${req.headers.host}/reset-password/${user.token}`;
+  console.log(resetUrl);
+};
+
+exports.resetPassword = async (req, res) => {
+  res.json(req.params.token);
 };
