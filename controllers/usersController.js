@@ -6,8 +6,10 @@ exports.createAccountForm = (req, res) => {
   });
 };
 exports.loginForm = (req, res) => {
+  const { error } = res.locals.messages;
   res.render("login", {
     pageName: "Log in to UpTask",
+    error,
   });
 };
 

@@ -8,6 +8,7 @@ const { body } = require("express-validator");
 const projectsController = require("../controllers/projectsController");
 const tasksController = require("../controllers/tasksController");
 const usersController = require("../controllers/usersController");
+const authController = require("../controllers/authController");
 
 module.exports = function () {
   router.get("/", projectsController.projectsHome);
@@ -48,6 +49,7 @@ module.exports = function () {
 
   //Login
   router.get("/login", usersController.loginForm);
+  router.post("/login", authController.authenticateUser);
 
   return router;
 };
