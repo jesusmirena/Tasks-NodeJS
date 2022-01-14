@@ -88,5 +88,8 @@ module.exports = function () {
   //Logout
   router.get("/logout", authController.logout);
 
+  //Reset Password
+  router.get("/reset-password", usersController.resetPasswordForm);
+
   return router;
 };

@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+    head
+        include partials/header
+    body.login
+        .contenedor-formulario
+            h1= pageName
+            p Enter your email to retrieve your password 
+            form.caja-login(method="POST" action="/reset-password")
+                .campo 
+                    label(for="email") E-mail: 
+                    input(type="email" name="email" placeholder="Your E-mail" value= email  required)
+                .campo.enviar
+                    input.boton(type="submit" value="Reset password")
+                .campo.acciones
+                    a(href="/login") Go back to Login
