@@ -11,35 +11,69 @@ const usersController = require("../controllers/usersController");
 const authController = require("../controllers/authController");
 
 module.exports = function () {
-  router.get("/", projectsController.projectsHome);
-  router.get("/new-project", projectsController.projectForm);
+  router.get(
+    "/",
+    authController.userAuthenticated,
+    projectsController.projectsHome
+  );
+  router.get(
+    "/new-project",
+    authController.userAuthenticated,
+    projectsController.projectForm
+  );
   router.post(
     "/new-project",
+    authController.userAuthenticated,
     body("nombre").not().isEmpty().trim().escape(),
     projectsController.newProject
   );
   //List project
-  router.get("/projects/:url", projectsController.projectByUrl);
+  router.get(
+    "/projects/:url",
+    authController.userAuthenticated,
+    projectsController.projectByUrl
+  );
 
   //Update project
-  router.get("/projects/edit/:id", projectsController.editForm);
+  router.get(
+    "/projects/edit/:id",
+    authController.userAuthenticated,
+    projectsController.editForm
+  );
   router.post(
     "/new-project/:id",
+    authController.userAuthenticated,
     body("nombre").not().isEmpty().trim().escape(),
     projectsController.updateProject
   );
 
   //Delete project
-  router.delete("/projects/:url/:id", projectsController.deleteProject);
+  router.delete(
+    "/projects/:url/:id",
+    authController.userAuthenticated,
+    projectsController.deleteProject
+  );
 
   //TASKS
-  router.post("/projects/:url", tasksController.addTask);
+  router.post(
+    "/projects/:url",
+    authController.userAuthenticated,
+    tasksController.addTask
+  );
 
   //Update task
-  router.patch("/tasks/:id", tasksController.changeTaskStatus);
+  router.patch(
+    "/tasks/:id",
+    authController.userAuthenticated,
+    tasksController.changeTaskStatus
+  );
 
   //Delete task
-  router.delete("/tasks/:id", tasksController.deleteTask);
+  router.delete(
+    "/tasks/:id",
+    authController.userAuthenticated,
+    tasksController.deleteTask
+  );
 
   //USERS
 
@@ -50,6 +84,9 @@ module.exports = function () {
   //Login
   router.get("/login", usersController.loginForm);
   router.post("/login", authController.authenticateUser);
+
+  //Logout
+  router.get("/logout", authController.logout);
 
   return router;
 };
