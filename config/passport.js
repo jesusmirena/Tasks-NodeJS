@@ -17,7 +17,11 @@ passport.use(
           where: { email: email },
         });
         if (!user.verifyPassword(password)) {
+          return done(null, false, {
+            message: "Password isn't correct",
+          });
         }
+        return done(null, user);
       } catch (error) {
         return done(null, false, {
           message: "This account doesn't exist",
@@ -26,3 +30,13 @@ passport.use(
     }
   )
 );
+
+//serialize and deserialize user
+passport.serializeUser((user, callback) => {
+  callback(null, user);
+});
+passport.deserializeUser((user, callback) => {
+  callback(null, user);
+});
+
+module.exports = passport;
