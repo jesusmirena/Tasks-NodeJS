@@ -6,16 +6,21 @@ html(lang="en")
         .contenedor-formulario
             h1 Create your UpTask Account
 
+            if locals.messages 
+                .alertas
+                    each category in Object.keys(locals.messages)
+                        each error in messages[category] 
+                            .alerta(class=`${category}`)
+                                p= error
+
             form#formulario.caja.caja-login(method="POST" action="/create-account")
                 .campo 
                     label(for="email") E-mail: 
-                    input(type="email" name="email" placeholder="Your E-mail" required)
+                    input(type="email" name="email" placeholder="Your E-mail" value= email  required)
                 .campo 
                     label(for="password") Password: 
-                    input(type="password" name="password" placeholder="Your Password" required)
+                    input(type="password" name="password" placeholder="Your Password" value= password required)
                 .campo.enviar
                     input.boton(type="submit" value="Create Account")
                 .campo
                     a(href="/login") Already have an account?
-                    
-        script(src="/dist/bundle.js") 

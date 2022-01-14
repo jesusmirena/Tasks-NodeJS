@@ -5,16 +5,35 @@ exports.createAccountForm = (req, res) => {
     pageName: "Create UpTask account",
   });
 };
+exports.loginForm = (req, res) => {
+  const { error } = res.locals.messages;
+  res.render("login", {
+    pageName: "Log in to UpTask",
+    error,
+  });
+};
 
-exports.createAccount = (req, res) => {
+exports.createAccount = async (req, res) => {
   //Read data
   const { email, password } = req.body;
 
-  //Creating the user
-  Users.create({
-    email,
-    password,
-  }).then(() => {
+  try {
+    //Creating the user
+    await Users.create({
+      email,
+      password,
+    });
     res.redirect("./login");
-  });
+  } catch (error) {
+    req.flash(
+      "error",
+      error.errors.map((error) => error.message)
+    );
+    res.render("createAccount", {
+      messages: req.flash(),
+      pageName: "Create UpTask account",
+      email,
+      password,
+    });
+  }
 };
