@@ -13,7 +13,7 @@ html(lang="en")
                             .alerta(class=`${category}`)
                                 p= error
                                 
-            form.caja-login(method="POST" action="/reset-password")
+            form.caja-login(method="POST" action="/reset")
                 .campo 
                     label(for="email") E-mail: 
                     input(type="email" name="email" placeholder="Your E-mail" value= email  required)

@@ -9,6 +9,12 @@ html(lang="en")
             if error 
                 p.alerta.error= error
 
+            if locals.messages 
+                .alertas
+                    each category in Object.keys(locals.messages)
+                        each error in messages[category] 
+                            .alerta(class=`${category}`)
+                                p= error
             form#formulario.caja.caja-login(method="POST" action="/login")
                 .campo 
                     label(for="email") E-mail: 
@@ -20,5 +26,5 @@ html(lang="en")
                     input.boton(type="submit" value="Log in")
                 .campo.acciones
                     a(href="/create-account") Create an account?
-                    a(href="/reset-password") Forgot your password?
+                    a(href="/reset") Forgot your password?
                     
