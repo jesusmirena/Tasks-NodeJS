@@ -2,7 +2,8 @@ const Projects = require("../models/Projects");
 const Tasks = require("../models/Tasks");
 
 exports.projectsHome = async (req, res) => {
-  const projects = await Projects.findAll();
+  const userId = res.locals.user.id;
+  const projects = await Projects.findAll({ where: { userId } });
 
   res.render("index", {
     pageName: "Projects",
@@ -11,7 +12,8 @@ exports.projectsHome = async (req, res) => {
 };
 
 exports.projectForm = async (req, res) => {
-  const projects = await Projects.findAll();
+  const userId = res.locals.user.id;
+  const projects = await Projects.findAll({ where: { userId } });
 
   res.render("newProject", {
     pageName: "New Project",
@@ -20,7 +22,8 @@ exports.projectForm = async (req, res) => {
 };
 
 exports.newProject = async (req, res) => {
-  const projects = await Projects.findAll();
+  const userId = res.locals.user.id;
+  const projects = await Projects.findAll({ where: { userId } });
 
   //Validate forms
   const { name } = req.body;
@@ -37,16 +40,21 @@ exports.newProject = async (req, res) => {
       projects,
     });
   } else {
-    await Projects.create({ name });
+    //No errors, insert in DB
+    const userId = res.locals.user.id;
+    await Projects.create({ name, userId });
     res.redirect("/");
   }
 };
 
 exports.projectByUrl = async (req, res, next) => {
-  const projectsPromise = Projects.findAll();
+  const userId = res.locals.user.id;
+  const projectsPromise = Projects.findAll({ where: { userId } });
+
   const projectPromise = Projects.findOne({
     where: {
       url: req.params.url,
+      userId,
     },
   });
 
@@ -73,10 +81,12 @@ exports.projectByUrl = async (req, res, next) => {
 };
 
 exports.editForm = async (req, res) => {
-  const projectsPromise = Projects.findAll();
+  const userId = res.locals.user.id;
+  const projectsPromise = Projects.findAll({ where: { userId } });
   const projectPromise = Projects.findOne({
     where: {
       id: req.params.id,
+      userId,
     },
   });
   const [projects, project] = await Promise.all([
@@ -91,7 +101,8 @@ exports.editForm = async (req, res) => {
 };
 
 exports.updateProject = async (req, res) => {
-  const projects = await Projects.findAll();
+  const userId = res.locals.user.id;
+  const projects = Projects.findAll({ where: { userId } });
 
   //Validate forms
   const { name } = req.body;

@@ -33,6 +33,8 @@ const Users = db.define(
         },
       },
     },
+    token: Sequelize.STRING,
+    expiration: Sequelize.DATE,
   },
   {
     hooks: {
@@ -48,6 +50,6 @@ Users.prototype.verifyPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
 
-// Users.hasMany(Projects);
+Users.hasMany(Projects);
 
 module.exports = Users;
