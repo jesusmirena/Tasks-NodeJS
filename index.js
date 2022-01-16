@@ -60,3 +60,5 @@ app.set("views", path.join(__dirname, "./views"));
 app.use("/", routes());
 
 app.listen(3000);
+
+require("./handlers/email");
