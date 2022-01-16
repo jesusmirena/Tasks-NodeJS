@@ -14,12 +14,18 @@ let transport = nodemailer.createTransport({
   },
 });
 
+const generateHTML = () => {
+  const html = pug.renderFile(
+    `${__dirname}/../views/emails/reset-password.pug`
+  );
+  return juice(html);
+};
 let mailOptions = {
   from: "UpTask <no-reply@uptask.com>", // sender address
   to: "baz@example.com", // list of receivers
   subject: "Password Reset", // Subject line
   text: "Hello world?", // plain text body
-  html: "<b>Hello world?</b>", // html body
+  html: generateHTML(), // html body
 };
 
 transport.sendMail(mailOptions);
