@@ -1,4 +1,5 @@
 const Users = require("../models/Users");
+const sendEmail = require("../handlers/email");
 
 exports.createAccountForm = (req, res) => {
   res.render("createAccount", {
@@ -23,6 +24,23 @@ exports.createAccount = async (req, res) => {
       email,
       password,
     });
+
+    const confirmUrl = `http://${req.headers.host}/confirm/${email}`;
+
+    const user = {
+      email,
+    };
+
+    await sendEmail.send({
+      user,
+      subject: "Confirm account",
+      confirmUrl,
+      file: "confirm-account",
+    });
+    req.flash(
+      "correcto",
+      "We have sent a message to your email, confirm your account"
+    );
     res.redirect("./login");
   } catch (error) {
     req.flash(

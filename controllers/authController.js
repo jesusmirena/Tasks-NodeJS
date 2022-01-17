@@ -46,6 +46,9 @@ exports.sendToken = async (req, res) => {
     resetUrl,
     file: "reset-password",
   });
+
+  req.flash("correcto", "We have sent a message to your email");
+  res.redirect("/login");
 };
 
 exports.validateToken = async (req, res) => {
