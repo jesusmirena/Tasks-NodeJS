@@ -61,3 +61,21 @@ exports.resetPasswordForm = (req, res) => {
     pageName: "Reset your Password",
   });
 };
+
+//Changes the account status
+exports.confirmAccount = async (req, res) => {
+  const user = await Users.findOne({
+    where: {
+      email: req.params.email,
+    },
+  });
+  if (!user) {
+    req.flash("error", "invalid");
+    res.redirect("/create-account");
+  }
+  user.active = 1;
+  await user.save();
+
+  req.flash("correcto", "Your account has been activated");
+  res.redirect("/login");
+};
