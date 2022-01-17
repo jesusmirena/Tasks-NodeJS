@@ -4,7 +4,8 @@
   "description": "Proyecto UPTastk con Node y MVC",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run dev \" \"npm run watch \"",
+    "development": "concurrently \"npm run dev \" \"npm run watch \"",
+    "start": "node ./index.js",
     "dev": "nodemon ./index.js",
     "watch": "webpack -w --mode development"
   },
