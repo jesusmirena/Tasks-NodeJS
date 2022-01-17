@@ -80,6 +80,7 @@ module.exports = function () {
   //Create account
   router.get("/create-account", usersController.createAccountForm);
   router.post("/create-account", usersController.createAccount);
+  router.get("/confirm/:email", usersController.confirmAccount);
 
   //Login
   router.get("/login", usersController.loginForm);

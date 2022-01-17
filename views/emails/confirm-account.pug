@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        style 
+            include ./email.css
+    body 
+        h2 Confirm your UpTask Account  
+        p You are almost ready, just press the next button
+        a(href=`${confirmUrl}`) Confirm account
+        p If you can't enter to this link, visit #{confirmUrl}
+        p If you didn't request this, you can ignore this email 

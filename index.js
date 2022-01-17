@@ -5,6 +5,7 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("./config/passport");
+require("dotenv").config();
 
 //Helpers with some functions
 const helpers = require("./helpers");
@@ -59,4 +60,9 @@ app.set("views", path.join(__dirname, "./views"));
 //Route
 app.use("/", routes());
 
-app.listen(3000);
+const host = process.env.HOST || "0.0.0.0";
+const port = process.env.PORT || 3000;
+
+app.listen(port, host, () => {
+  console.log("Server connected");
+});
